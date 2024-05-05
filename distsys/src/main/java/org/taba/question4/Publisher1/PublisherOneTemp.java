@@ -22,6 +22,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -31,12 +32,12 @@ import java.util.Random;
 public class PublisherOneTemp extends Thread
 {
     //Set up the class and name the queue
-    private static String AIR_TEMPERATURE = "firstFloor/kitchen/temperature";
-
+    private static final String QUEUE_AIR_TEMP_KITCHEN = "FirstFloor/Kitchen/Temperature";
+    private static final String QUEUE_AIR_TEMP_ROOM = "SecondFloor/Room/Temperature";
+    private static final String QUEUE_AIR_TEMP_OFFICE = "SecondFloor/Office/Temperature";
 
     // create instance of Random class
     static Random myRandom = new Random();
-
 
     /** RabbitMQ tutorial: https://www.rabbitmq.com/tutorials/tutorial-one-java */
     /** This will generate the temperature */
@@ -72,21 +73,31 @@ public class PublisherOneTemp extends Thread
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel();)
         {
-            channel.queueDeclare(AIR_TEMPERATURE, false, false, false, null);
+            channel.queueDeclare(QUEUE_AIR_TEMP_KITCHEN, false, false, false, null);
+            channel.queueDeclare(QUEUE_AIR_TEMP_ROOM, false, false, false, null);
+            channel.queueDeclare(QUEUE_AIR_TEMP_OFFICE, false, false, false, null);
 
             // Publish each transaction in the ArrayList to the queue with a delay
             for (int i = 0; i < 1000; i++)
             {
-                double temperature = myRandom.nextDouble(0.8) + 18;
+                double tempKitchen = myRandom.nextDouble(0.6) + 19;
+                double tempRoom = myRandom.nextDouble(0.7) + 18;
+                double tempOffice = myRandom.nextDouble(0.8) + 17;
 
                 //Format the temperature with two decimal places
-                StringBuilder myTemp = new StringBuilder();
-                myTemp.append("Temperature: ");
-                myTemp.append(String.format("%.2f" , temperature));
-                myTemp.append(" ºC");
+                String myTempKitchen = String.format("%.2fºC", tempKitchen) + " Kitchen";
+                String myTempRoom = String.format("%.2fºC", tempRoom) + " Room";
+                String myTempOffice = String.format("%.2fºC", tempOffice) + " Office";
 
-                channel.basicPublish("", AIR_TEMPERATURE, null, String.valueOf(myTemp).getBytes());
-                System.out.println(" [x] Temperature -> Sent '" + i + "'");
+                //Sending...
+                channel.basicPublish("", QUEUE_AIR_TEMP_KITCHEN, null, myTempKitchen.getBytes());
+                System.out.println(" [x] -> Sent '" + QUEUE_AIR_TEMP_KITCHEN  + "'");
+
+                channel.basicPublish("", QUEUE_AIR_TEMP_ROOM, null, myTempRoom.getBytes());
+                System.out.println(" [x] -> Sent '" + QUEUE_AIR_TEMP_ROOM + " '");
+
+                channel.basicPublish("", QUEUE_AIR_TEMP_OFFICE, null, myTempOffice.getBytes());
+                System.out.println(" [x] -> Sent '" + QUEUE_AIR_TEMP_OFFICE + "'");
 
                 Thread.sleep(1000); //waiting 1 sec
             }

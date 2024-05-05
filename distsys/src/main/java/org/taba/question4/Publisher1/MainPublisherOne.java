@@ -29,8 +29,8 @@ public class MainPublisherOne
         //Lights
         PublisherTwoLights myPublisherTwoLights = new PublisherTwoLights();
 
-        //myPublisherOneTemp.start();
+        myPublisherOneTemp.start();
         //myPublisherOneHumidity.start();
-        myPublisherTwoLights.start();
+        //myPublisherTwoLights.start();
     }
 }

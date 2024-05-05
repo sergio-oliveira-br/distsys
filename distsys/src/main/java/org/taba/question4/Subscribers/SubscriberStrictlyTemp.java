@@ -38,9 +38,10 @@ public class SubscriberStrictlyTemp
      * and declare the queue from which we're going to consume.
      * Note this matches up with the queue that send publishes to.
      */
-    private final static String AIR_TEMPERATURE = "firstFloor/kitchen/temperature";
-    private final static String AIR_HUMIDITY = "firstFloor/kitchen/humidity";
-    private static String LIGHTS = "floor/light/ID";
+    private static final String QUEUE_AIR_TEMP_KITCHEN = "FirstFloor/Kitchen/Temperature";
+    private static final String QUEUE_AIR_TEMP_ROOM = "SecondFloor/Room/Temperature";
+    private static final String QUEUE_AIR_TEMP_OFFICE = "SecondFloor/Office/Temperature";
+
     private static final CountDownLatch latch = new CountDownLatch(1);
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
@@ -56,9 +57,9 @@ public class SubscriberStrictlyTemp
          * we want to make sure the queue exists before we try to consume messages from it.
          */
 
-        channel.queueDeclare(AIR_TEMPERATURE, false, false, false, null);
-        channel.queueDeclare(AIR_HUMIDITY, false, false, false, null);
-        channel.queueDeclare(LIGHTS, false, false, false, null);
+        channel.queueDeclare(QUEUE_AIR_TEMP_KITCHEN, false, false, false, null);
+        channel.queueDeclare(QUEUE_AIR_TEMP_ROOM, false, false, false, null);
+        channel.queueDeclare(QUEUE_AIR_TEMP_OFFICE, false, false, false, null);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
@@ -73,9 +74,9 @@ public class SubscriberStrictlyTemp
         };
 
         //Start consuming messages from the queue
-        channel.basicConsume(AIR_TEMPERATURE, true, consumer);
-        channel.basicConsume(AIR_HUMIDITY, true, consumer);
-        channel.basicConsume(LIGHTS, true, consumer);
+        channel.basicConsume(QUEUE_AIR_TEMP_KITCHEN, true, consumer);
+        channel.basicConsume(QUEUE_AIR_TEMP_ROOM, true, consumer);
+        channel.basicConsume(QUEUE_AIR_TEMP_OFFICE, true, consumer);
 
         //Wait indefinitely until notified to exit
         latch.await();
