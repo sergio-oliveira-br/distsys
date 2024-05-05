@@ -11,9 +11,9 @@
  *              ---
  * Question 4:By using the MQTT protocol
  * implement in Java the Publisher - Subscriber
- *
+ *              ---
  * RabbitMQ tutorial:
- *  *  https://www.rabbitmq.com/tutorials/tutorial-one-java
+ * https://www.rabbitmq.com/tutorials/tutorial-one-java
  */
 
 package org.taba.question4.Subscribers;
