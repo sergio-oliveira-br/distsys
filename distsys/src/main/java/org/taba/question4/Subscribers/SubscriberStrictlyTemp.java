@@ -28,7 +28,7 @@ import java.util.concurrent.TimeoutException;
  * This Subscriber listens for messages:
  * 4.b) strictly messages related to a floor/room/temperature
  */
-public class SubscriberStrictly
+public class SubscriberStrictlyTemp
 {
     /** RabbitMQ tutorial: https://www.rabbitmq.com/tutorials/tutorial-one-java */
 
