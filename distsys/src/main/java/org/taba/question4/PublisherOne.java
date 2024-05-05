@@ -76,6 +76,10 @@ public class PublisherOne
         {
             System.out.println("Oops! Something went wrong... =[");
         }
+    }
 
+    public static void main(String[] args)
+    {
+        myTemperature();
     }
 }
