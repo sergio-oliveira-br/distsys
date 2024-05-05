@@ -24,11 +24,11 @@ import com.rabbitmq.client.ConnectionFactory;
 
 import java.util.Random;
 
-public class PublisherOneTemp
+public class PublisherOneTemp extends Thread
 {
     //Set up the class and name the queue
     private static String AIR_TEMPERATURE = "firstFloor/kitchen/temperature";
-    private static String AIR_HUMIDITY = "firstFloor/kitchen/humidity";
+
 
     // create instance of Random class
     static Random myRandom = new Random();
@@ -36,7 +36,7 @@ public class PublisherOneTemp
 
     /** RabbitMQ tutorial: https://www.rabbitmq.com/tutorials/tutorial-one-java */
     /** This will generate the temperature */
-    public static void setAirTemperature()
+    public void run()
     {
         /**
          * The connection abstracts the socket connection,
@@ -90,39 +90,6 @@ public class PublisherOneTemp
         catch (Exception e)
         {
             System.out.println("Oops! Something went wrong... =[   \nsetAirTemperature()");
-        }
-    }
-
-    public static void setAirHumidity()
-    {
-        //Create a connection to the server:
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost"); //RabbitMQ server host -> http://localhost:15672/#/
-
-        try (Connection connection1 = factory.newConnection();
-             Channel channel1 = connection1.createChannel();)
-        {
-            channel1.queueDeclare(AIR_HUMIDITY, false, false, false, null);
-
-            for (int i = 0; i < 1000; i++)
-            {
-                double humidity = myRandom.nextDouble(0.5) + 83;
-
-                //Format the temperature with two decimal places
-                StringBuilder myHumidity = new StringBuilder();
-                myHumidity.append("Humidity: ");
-                myHumidity.append(String.format("%.2f" , humidity));
-                myHumidity.append(" %");
-
-                channel1.basicPublish("", AIR_HUMIDITY, null, String.valueOf(myHumidity).getBytes());
-                System.out.println(" [x] Humidity -> Sent '" + i + "'");
-
-                Thread.sleep(1000); //waiting 1 sec
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println("Oops! Something went wrong... =[   \nsetAirHumidity()");
         }
     }
 }

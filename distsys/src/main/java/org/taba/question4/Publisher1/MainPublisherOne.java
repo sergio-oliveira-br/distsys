@@ -4,9 +4,13 @@ public class MainPublisherOne
 {
     public static void main(String[] args)
     {
-        PublisherOneTemp myPublisher = new PublisherOneTemp();
+        //Temperature
+        PublisherOneTemp myPublisherOneTemp = new PublisherOneTemp();
 
-        //myPublisher.setAirTemperature();
-        myPublisher.setAirHumidity();
+        //Humidity
+        PublisherOneHumidity myPublisherOneHumidity = new PublisherOneHumidity();
+
+        myPublisherOneTemp.start();
+        myPublisherOneHumidity.start();
     }
 }

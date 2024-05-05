@@ -24,7 +24,7 @@ import com.rabbitmq.client.ConnectionFactory;
 
 import java.util.Random;
 
-public class PublisherOneHumidity
+public class PublisherOneHumidity extends Thread
 {
     //Set up the class and name the queue
     private static String AIR_HUMIDITY = "firstFloor/kitchen/humidity";
@@ -32,7 +32,7 @@ public class PublisherOneHumidity
     // create instance of Random class
     static Random myRandom = new Random();
 
-    public static void setAirHumidity()
+    public void run()
     {
         //Create a connection to the server:
         ConnectionFactory factory = new ConnectionFactory();
