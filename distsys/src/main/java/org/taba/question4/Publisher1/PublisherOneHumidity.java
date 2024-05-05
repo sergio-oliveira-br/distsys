@@ -24,6 +24,9 @@ import com.rabbitmq.client.ConnectionFactory;
 
 import java.util.Random;
 
+/** This is a client (program) that publishes messages every second about the room;
+ *  like the floor/room/humidity (e.g. 25%)
+ */
 public class PublisherOneHumidity extends Thread
 {
     //Set up the class and name the queue
