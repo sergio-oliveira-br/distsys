@@ -40,11 +40,13 @@ public class SubscriberStrictly
      */
     private final static String AIR_TEMPERATURE = "firstFloor/kitchen/temperature";
     private final static String AIR_HUMIDITY = "firstFloor/kitchen/humidity";
+    private static String LIGHTS = "floor/light/ID";
     private static final CountDownLatch latch = new CountDownLatch(1);
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");   //RabbitMQ server host -> http://localhost:15672/#/
+
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
@@ -56,6 +58,7 @@ public class SubscriberStrictly
 
         channel.queueDeclare(AIR_TEMPERATURE, false, false, false, null);
         channel.queueDeclare(AIR_HUMIDITY, false, false, false, null);
+        channel.queueDeclare(LIGHTS, false, false, false, null);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
@@ -72,6 +75,7 @@ public class SubscriberStrictly
         //Start consuming messages from the queue
         channel.basicConsume(AIR_TEMPERATURE, true, consumer);
         channel.basicConsume(AIR_HUMIDITY, true, consumer);
+        channel.basicConsume(LIGHTS, true, consumer);
 
         //Wait indefinitely until notified to exit
         latch.await();
