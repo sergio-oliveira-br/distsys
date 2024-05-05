@@ -23,16 +23,20 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PublisherOne
 {
     //Set up the class and name the queue
     private static String AIR_TEMPERATURE = "firstFloor/kitchen/temperature";
-    private static int temperature;
+    private static String AIR_HUMIDITY = "firstFloor/kitchen/humidity";
+    // create instance of Random class
+    static Random myRandom = new Random();
+
 
     /** RabbitMQ tutorial: https://www.rabbitmq.com/tutorials/tutorial-one-java */
     /** This will generate the temperature */
-    public static void myTemperature()
+    public static void setAirTemperature()
     {
         /**
          * The connection abstracts the socket connection,
@@ -66,11 +70,23 @@ public class PublisherOne
         {
             channel.queueDeclare(AIR_TEMPERATURE, false, false, false, null);
 
-            String message = "TESTING... Hello World ...TESTING";
+            // Publish each transaction in the ArrayList to the queue with a delay
+            for (int i = 0; i < 1000; i++)
+            {
+                double temperature = myRandom.nextDouble(0.8) + 18;
+                double humidity = myRandom.nextDouble(0.5) + 83;
 
-            channel.basicPublish("", AIR_TEMPERATURE, null, message.getBytes());
-            System.out.println(" [x] Sent '" + message + "'");
+                //Format the temperature with two decimal places
+                StringBuilder myTemp = new StringBuilder();
+                myTemp.append("Temperature: ");
+                myTemp.append(String.format("%.2f" , temperature));
+                myTemp.append(" ºC");
 
+                channel.basicPublish("", AIR_TEMPERATURE, null, String.valueOf(myTemp).getBytes());
+                System.out.println(" [x] Sent '" + i + "'");
+
+                Thread.sleep(1000); //waiting 1 sec
+            }
         }
         catch (Exception e)
         {
@@ -78,8 +94,17 @@ public class PublisherOne
         }
     }
 
+    public static void setAirHumidity()
+    {
+        //Create a connection to the server:
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost"); //RabbitMQ server host -> http://localhost:15672/#/
+
+    }
+
     public static void main(String[] args)
     {
-        myTemperature();
+        setAirTemperature();
+        //setAirHumidity();
     }
 }
