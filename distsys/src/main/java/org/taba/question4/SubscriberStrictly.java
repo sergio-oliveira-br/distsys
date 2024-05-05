@@ -18,11 +18,10 @@
 
 package org.taba.question4;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -40,8 +39,9 @@ public class SubscriberStrictly
      * Note this matches up with the queue that send publishes to.
      */
     private final static String AIR_TEMPERATURE = "firstFloor/kitchen/temperature";
+    private static final CountDownLatch latch = new CountDownLatch(1);
 
-    public static void main(String[] args) throws IOException, TimeoutException {
+    public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");   //RabbitMQ server host -> http://localhost:15672/#/
         Connection connection = factory.newConnection();
@@ -56,5 +56,20 @@ public class SubscriberStrictly
         channel.queueDeclare(AIR_TEMPERATURE, false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
+        //Create a consumer and bind it to the queue
+        Consumer consumer = new DefaultConsumer(channel)
+        {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String message = new String(body, "UTF-8");
+                System.out.println(" [x] Received '" + message + "'");
+            }
+        };
+
+        //Start consuming messages from the queue
+        channel.basicConsume(AIR_TEMPERATURE, true, consumer);
+
+        //Wait indefinitely until notified to exit
+        latch.await();
     }
 }
