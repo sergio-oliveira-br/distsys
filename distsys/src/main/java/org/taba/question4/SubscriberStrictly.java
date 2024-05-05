@@ -39,6 +39,7 @@ public class SubscriberStrictly
      * Note this matches up with the queue that send publishes to.
      */
     private final static String AIR_TEMPERATURE = "firstFloor/kitchen/temperature";
+    private final static String AIR_HUMIDITY = "firstFloor/kitchen/humidity";
     private static final CountDownLatch latch = new CountDownLatch(1);
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
@@ -54,6 +55,8 @@ public class SubscriberStrictly
          */
 
         channel.queueDeclare(AIR_TEMPERATURE, false, false, false, null);
+        channel.queueDeclare(AIR_HUMIDITY, false, false, false, null);
+
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         //Create a consumer and bind it to the queue
@@ -68,6 +71,7 @@ public class SubscriberStrictly
 
         //Start consuming messages from the queue
         channel.basicConsume(AIR_TEMPERATURE, true, consumer);
+        channel.basicConsume(AIR_HUMIDITY, true, consumer);
 
         //Wait indefinitely until notified to exit
         latch.await();
