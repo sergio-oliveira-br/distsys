@@ -16,7 +16,7 @@
  *  *  https://www.rabbitmq.com/tutorials/tutorial-one-java
  */
 
-package org.taba.question4;
+package org.taba.question4.Subscribers;
 
 import com.rabbitmq.client.*;
 
