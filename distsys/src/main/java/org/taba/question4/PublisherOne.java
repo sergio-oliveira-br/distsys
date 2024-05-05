@@ -45,7 +45,7 @@ public class PublisherOne
 
         //Create a connection to the server:
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost"); // RabbitMQ server host -> http://localhost:15672/#/
+        factory.setHost("localhost"); //RabbitMQ server host -> http://localhost:15672/#/
 
         /**
          * Next we create a channel, which is where most of the API
