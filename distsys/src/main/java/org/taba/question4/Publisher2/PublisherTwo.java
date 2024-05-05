@@ -13,7 +13,7 @@
  * implement in Java the Publisher - Subscriber
  */
 
-package org.taba.question4;
+package org.taba.question4.Publisher2;
 
 public class PublisherTwo {
 }
