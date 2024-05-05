@@ -16,7 +16,7 @@
  *  *  https://www.rabbitmq.com/tutorials/tutorial-one-java
  */
 
-package org.taba.question4;
+package org.taba.question4.Publisher1;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -24,7 +24,7 @@ import com.rabbitmq.client.ConnectionFactory;
 
 import java.util.Random;
 
-public class PublisherOne
+public class PublisherOneTemp
 {
     //Set up the class and name the queue
     private static String AIR_TEMPERATURE = "firstFloor/kitchen/temperature";
@@ -124,12 +124,5 @@ public class PublisherOne
         {
             System.out.println("Oops! Something went wrong... =[   \nsetAirHumidity()");
         }
-
-    }
-
-    public static void main(String[] args)
-    {
-        setAirTemperature();
-        setAirHumidity();
     }
 }
