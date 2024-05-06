@@ -47,7 +47,7 @@ public class PublisherTwoLights extends Thread
             //b:true, is durable queue / b1:false, is not exclusive / b2:false, it won't be deleted automatically
 
             //Publish every random number multiple times with a delay.
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 //Publishing the Messages (ON/OFF)
                 String msgON = " -> Lights [ON]";

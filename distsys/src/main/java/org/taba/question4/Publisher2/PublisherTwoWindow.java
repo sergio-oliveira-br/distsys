@@ -48,7 +48,7 @@ public class PublisherTwoWindow extends Thread
             channel.queueDeclare(QUEUE_WINDOW_LOUNGE, false, false, false, null);
 
             //Publish every random number multiple times with a delay.
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 //Publishing the Messages (ON/OFF)
                 String msgOpen = " -> Window [OPEN]";
