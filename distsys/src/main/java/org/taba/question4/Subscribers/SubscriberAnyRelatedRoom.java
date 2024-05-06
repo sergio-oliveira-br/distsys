@@ -14,5 +14,5 @@
  */
 package org.taba.question4.Subscribers;
 
-public class SubscriberAnyRoom {
+public class SubscriberAnyRelatedRoom {
 }
