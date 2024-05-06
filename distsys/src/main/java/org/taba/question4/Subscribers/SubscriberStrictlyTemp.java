@@ -51,8 +51,6 @@ public class SubscriberStrictlyTemp
     private static final String QUEUE_AIR_HUMIDITY_OFFICE = "SecondFloor/Office/Humidity";
     private static final String QUEUE_AIR_HUMIDITY_LOUNGE = "FirstFloor/Lounge/Humidity";
 
-
-
     private static final CountDownLatch latch = new CountDownLatch(1);
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
@@ -69,16 +67,16 @@ public class SubscriberStrictlyTemp
          */
 
         //Testing... Temperature
-        channel.queueDeclare(QUEUE_AIR_TEMP_KITCHEN, false, false, false, null);
-        channel.queueDeclare(QUEUE_AIR_TEMP_ROOM, false, false, false, null);
-        channel.queueDeclare(QUEUE_AIR_TEMP_OFFICE, false, false, false, null);
-        channel.queueDeclare(QUEUE_AIR_TEMP_LOUNGE, false, false, false, null);
+        //channel.queueDeclare(QUEUE_AIR_TEMP_KITCHEN, false, false, false, null);              //USED TO TEST
+        channel.queueDeclare(QUEUE_AIR_TEMP_ROOM, false, false, false, null);   //Strictly messages related to a floor/room/temperature
+        //channel.queueDeclare(QUEUE_AIR_TEMP_OFFICE, false, false, false, null);               //USED TO TEST
+        //channel.queueDeclare(QUEUE_AIR_TEMP_LOUNGE, false, false, false, null);               //USED TO TEST
 
         //Testing... Humidity
-        channel.queueDeclare(QUEUE_AIR_HUMIDITY_KITCHEN, false, false, false, null);
-        channel.queueDeclare(QUEUE_AIR_HUMIDITY_ROOM, false, false, false, null);
-        channel.queueDeclare(QUEUE_AIR_HUMIDITY_OFFICE, false, false, false, null);
-        channel.queueDeclare(QUEUE_AIR_HUMIDITY_LOUNGE, false, false, false, null);
+        //channel.queueDeclare(QUEUE_AIR_HUMIDITY_KITCHEN, false, false, false, null);          //USED TO TEST
+        //channel.queueDeclare(QUEUE_AIR_HUMIDITY_ROOM, false, false, false, null);             //USED TO TEST
+        //channel.queueDeclare(QUEUE_AIR_HUMIDITY_OFFICE, false, false, false, null);           //USED TO TEST
+        //channel.queueDeclare(QUEUE_AIR_HUMIDITY_LOUNGE, false, false, false, null);           //USED TO TEST
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
@@ -93,16 +91,16 @@ public class SubscriberStrictlyTemp
         };
 
         //Start consuming messages from the queue (Publisher One Temp)
-        channel.basicConsume(QUEUE_AIR_TEMP_KITCHEN, true, consumer);
-        channel.basicConsume(QUEUE_AIR_TEMP_ROOM, true, consumer);
-        channel.basicConsume(QUEUE_AIR_TEMP_OFFICE, true, consumer);
-        channel.basicConsume(QUEUE_AIR_TEMP_LOUNGE, true, consumer);
+        //channel.basicConsume(QUEUE_AIR_TEMP_KITCHEN, true, consumer);     //USED TO TEST
+        channel.basicConsume(QUEUE_AIR_TEMP_ROOM, true, consumer);       //Strictly messages related to a floor/room/temperature
+        //channel.basicConsume(QUEUE_AIR_TEMP_OFFICE, true, consumer);      //USED TO TEST
+        //channel.basicConsume(QUEUE_AIR_TEMP_LOUNGE, true, consumer);      //USED TO TEST
 
         //Start consuming messages from the queue (Publisher One Humidity)
-        channel.basicConsume(QUEUE_AIR_HUMIDITY_KITCHEN, true, consumer);
-        channel.basicConsume(QUEUE_AIR_HUMIDITY_ROOM, true, consumer);
-        channel.basicConsume(QUEUE_AIR_HUMIDITY_OFFICE, true, consumer);
-        channel.basicConsume(QUEUE_AIR_HUMIDITY_LOUNGE, true, consumer);
+        //channel.basicConsume(QUEUE_AIR_HUMIDITY_KITCHEN, true, consumer); //USED TO TEST
+        //channel.basicConsume(QUEUE_AIR_HUMIDITY_ROOM, true, consumer);    //USED TO TEST
+        //channel.basicConsume(QUEUE_AIR_HUMIDITY_OFFICE, true, consumer);  //USED TO TEST
+        //channel.basicConsume(QUEUE_AIR_HUMIDITY_LOUNGE, true, consumer);  //USED TO TEST
 
         //Wait indefinitely until notified to exit
         latch.await();
