@@ -35,8 +35,10 @@ public class SubscriberRelatedLightWindow
     private static final String QUEUE_LIGHTS_LOUNGE = "1ºFloor/Light:Lounge/ID:1197";
 
     //From Publisher 2, Window:
-
-
+    private static final String QUEUE_WINDOW_KITCHEN = "1ºFloor/Window/Kitchen";
+    private static final String QUEUE_WINDOW_ROOM = "2ºFloor/Window/Room";
+    private static final String QUEUE_WINDOW_OFFICE = "2ºFloor/Window/Office";
+    private static final String QUEUE_WINDOW_LOUNGE = "1ºFloor/Window/Lounge";
 
 
     private static final CountDownLatch latch = new CountDownLatch(1);
@@ -57,7 +59,10 @@ public class SubscriberRelatedLightWindow
         //b:true, is durable queue / b1:false, is not exclusive / b2:false, it won't be deleted automatically
 
         //From Publisher 2, Window:
-
+        channel.queueDeclare(QUEUE_WINDOW_KITCHEN, false, false, false, null);
+        channel.queueDeclare(QUEUE_WINDOW_ROOM, false, false, false, null);
+        channel.queueDeclare(QUEUE_WINDOW_OFFICE, false, false, false, null);
+        channel.queueDeclare(QUEUE_WINDOW_LOUNGE, false, false, false, null);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
@@ -79,6 +84,10 @@ public class SubscriberRelatedLightWindow
         channel.basicConsume(QUEUE_LIGHTS_LOUNGE, true, consumer);
 
         //From Publisher 2, Window:
+        channel.basicConsume(QUEUE_WINDOW_KITCHEN, true, consumer);
+        channel.basicConsume(QUEUE_WINDOW_ROOM, true, consumer);
+        channel.basicConsume(QUEUE_WINDOW_OFFICE, true, consumer);
+        channel.basicConsume(QUEUE_WINDOW_LOUNGE, true, consumer);
 
         /**Wait indefinitely until notified to exit */
         latch.await();
