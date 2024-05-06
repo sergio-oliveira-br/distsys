@@ -62,16 +62,16 @@ public class PublisherTwoWindow extends Thread
 
                 //Publishing...
                 channel.basicPublish("", QUEUE_WINDOW_KITCHEN, null, myKitchen.getBytes());
-                System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_WINDOW_KITCHEN + "'");
+                System.out.println(" [x] Publisher Two [x] Sent Window Status: '" + QUEUE_WINDOW_KITCHEN + "'");
 
                 channel.basicPublish("", QUEUE_WINDOW_ROOM, null, myRoom.getBytes());
-                System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_WINDOW_ROOM + "'");
+                System.out.println(" [x] Publisher Two [x] Sent Window Status: '" + QUEUE_WINDOW_ROOM + "'");
 
                 channel.basicPublish("", QUEUE_WINDOW_OFFICE, null, myOffice.getBytes());
-                System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_WINDOW_OFFICE + "'");
+                System.out.println(" [x] Publisher Two [x] Sent Window Status: '" + QUEUE_WINDOW_OFFICE + "'");
 
                 channel.basicPublish("", QUEUE_WINDOW_LOUNGE, null, myLounge.getBytes());
-                System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_WINDOW_LOUNGE + "'");
+                System.out.println(" [x] Publisher Two [x] Sent Window Status: '" + QUEUE_WINDOW_LOUNGE + "'");
 
                 Thread.sleep(500); //waiting 1/2 sec
             }
