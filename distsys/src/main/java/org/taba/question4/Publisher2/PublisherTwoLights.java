@@ -46,7 +46,8 @@ public class PublisherTwoLights extends Thread
             channel.queueDeclare(QUEUE_LIGHTS_LOUNGE, true, false, false, null);
             //b:true, is durable queue / b1:false, is not exclusive / b2:false, it won't be deleted automatically
 
-            for (int i = 0; i < 10; i++)
+            //Publish every random number multiple times with a delay.
+            for (int i = 0; i < 50; i++)
             {
                 //Publishing the Messages (ON/OFF)
                 String msgON = " -> Lights [ON]";
