@@ -40,28 +40,32 @@ public class PublisherTwoLights extends Thread
              Channel channel = connection.createChannel();)
         {
             //Declaring the Queue
-            channel.queueDeclare(QUEUE_LIGHTS_KITCHEN, false, false, false, null);
-            channel.queueDeclare(QUEUE_LIGHTS_ROOM, false, false, false, null);
-            channel.queueDeclare(QUEUE_LIGHTS_OFFICE, false, false, false, null);
-            channel.queueDeclare(QUEUE_LIGHTS_LOUNGE, false, false, false, null);
+            channel.queueDeclare(QUEUE_LIGHTS_KITCHEN, true, false, false, null);
+            channel.queueDeclare(QUEUE_LIGHTS_ROOM, true, false, false, null);
+            channel.queueDeclare(QUEUE_LIGHTS_OFFICE, true, false, false, null);
+            channel.queueDeclare(QUEUE_LIGHTS_LOUNGE, true, false, false, null);
+            //b:true, is durable queue / b1:false, is not exclusive / b2:false, it won't be deleted automatically
 
-            //Publishing the Messages (ON/OFF)
-            String msgON = "Lights ON";
-            String msgOFF = "Lights OFF";
+            for (int i = 0; i < 10; i++)
+            {
+                //Publishing the Messages (ON/OFF)
+                String msgON = "Lights ON";
+                String msgOFF = "Lights OFF";
 
-            channel.basicPublish("", QUEUE_LIGHTS_KITCHEN, null, msgON.getBytes() );
-            System.out.println(" [x] Publisher Two -> Sent '" + "'");
+                channel.basicPublish("", QUEUE_LIGHTS_KITCHEN, null, msgON.getBytes() );
+                System.out.println(" [x] Publisher Two -> Sent '" + "'");
 
-            channel.basicPublish("", QUEUE_LIGHTS_ROOM, null, msgOFF.getBytes() );
-            System.out.println(" [x] Publisher Two -> Sent '" + "'");
+                channel.basicPublish("", QUEUE_LIGHTS_ROOM, null, msgOFF.getBytes() );
+                System.out.println(" [x] Publisher Two -> Sent '" + "'");
 
-            channel.basicPublish("", QUEUE_LIGHTS_OFFICE, null, msgOFF.getBytes() );
-            System.out.println(" [x] Publisher Two -> Sent '" + "'");
+                channel.basicPublish("", QUEUE_LIGHTS_OFFICE, null, msgOFF.getBytes() );
+                System.out.println(" [x] Publisher Two -> Sent '" + "'");
 
-            channel.basicPublish("", QUEUE_LIGHTS_LOUNGE, null, msgON.getBytes() );
-            System.out.println(" [x] Publisher Two -> Sent '" + "'");
+                channel.basicPublish("", QUEUE_LIGHTS_LOUNGE, null, msgON.getBytes() );
+                System.out.println(" [x] Publisher Two -> Sent '" + "'");
 
-            Thread.sleep(500); //waiting 1/2 sec
+                Thread.sleep(500); //waiting 1/2 sec
+            }
         }
 
         catch (Exception e)

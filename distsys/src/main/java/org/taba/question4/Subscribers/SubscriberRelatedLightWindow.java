@@ -54,6 +54,7 @@ public class SubscriberRelatedLightWindow
         channel.queueDeclare(QUEUE_LIGHTS_ROOM, true, false, false, null);
         channel.queueDeclare(QUEUE_LIGHTS_OFFICE, true, false, false, null);
         channel.queueDeclare(QUEUE_LIGHTS_LOUNGE, true, false, false, null);
+        //b:true, is durable queue / b1:false, is not exclusive / b2:false, it won't be deleted automatically
 
         //From Publisher 2, Window:
 

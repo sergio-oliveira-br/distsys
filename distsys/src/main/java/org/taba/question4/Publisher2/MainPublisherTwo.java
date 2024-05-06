@@ -14,9 +14,6 @@
  */
 package org.taba.question4.Publisher2;
 
-import org.taba.question4.Publisher1.PublisherOneHumidity;
-import org.taba.question4.Publisher1.PublisherOneTemp;
-
 public class MainPublisherTwo
 {
     public static void main(String[] args)
