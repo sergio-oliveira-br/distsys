@@ -38,9 +38,20 @@ public class SubscriberStrictlyTemp
      * and declare the queue from which we're going to consume.
      * Note this matches up with the queue that send publishes to.
      */
+
+    //From Publisher One Temp
     private static final String QUEUE_AIR_TEMP_KITCHEN = "FirstFloor/Kitchen/Temperature";
     private static final String QUEUE_AIR_TEMP_ROOM = "SecondFloor/Room/Temperature";
     private static final String QUEUE_AIR_TEMP_OFFICE = "SecondFloor/Office/Temperature";
+    private static final String QUEUE_AIR_TEMP_LOUNGE = "FirstFloor/Lounge/Temperature";
+
+    //From Publisher One Humidity
+    private static final String QUEUE_AIR_HUMIDITY_KITCHEN = "FirstFloor/Kitchen/Humidity";
+    private static final String QUEUE_AIR_HUMIDITY_ROOM = "SecondFloor/Room/Humidity";
+    private static final String QUEUE_AIR_HUMIDITY_OFFICE = "SecondFloor/Office/Humidity";
+    private static final String QUEUE_AIR_HUMIDITY_LOUNGE = "FirstFloor/Lounge/Humidity";
+
+
 
     private static final CountDownLatch latch = new CountDownLatch(1);
 
@@ -57,9 +68,17 @@ public class SubscriberStrictlyTemp
          * we want to make sure the queue exists before we try to consume messages from it.
          */
 
+        //Testing... Temperature
         channel.queueDeclare(QUEUE_AIR_TEMP_KITCHEN, false, false, false, null);
         channel.queueDeclare(QUEUE_AIR_TEMP_ROOM, false, false, false, null);
         channel.queueDeclare(QUEUE_AIR_TEMP_OFFICE, false, false, false, null);
+        channel.queueDeclare(QUEUE_AIR_TEMP_LOUNGE, false, false, false, null);
+
+        //Testing... Humidity
+        channel.queueDeclare(QUEUE_AIR_HUMIDITY_KITCHEN, false, false, false, null);
+        channel.queueDeclare(QUEUE_AIR_HUMIDITY_ROOM, false, false, false, null);
+        channel.queueDeclare(QUEUE_AIR_HUMIDITY_OFFICE, false, false, false, null);
+        channel.queueDeclare(QUEUE_AIR_HUMIDITY_LOUNGE, false, false, false, null);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
@@ -73,10 +92,17 @@ public class SubscriberStrictlyTemp
             }
         };
 
-        //Start consuming messages from the queue
+        //Start consuming messages from the queue (Publisher One Temp)
         channel.basicConsume(QUEUE_AIR_TEMP_KITCHEN, true, consumer);
         channel.basicConsume(QUEUE_AIR_TEMP_ROOM, true, consumer);
         channel.basicConsume(QUEUE_AIR_TEMP_OFFICE, true, consumer);
+        channel.basicConsume(QUEUE_AIR_TEMP_LOUNGE, true, consumer);
+
+        //Start consuming messages from the queue (Publisher One Humidity)
+        channel.basicConsume(QUEUE_AIR_HUMIDITY_KITCHEN, true, consumer);
+        channel.basicConsume(QUEUE_AIR_HUMIDITY_ROOM, true, consumer);
+        channel.basicConsume(QUEUE_AIR_HUMIDITY_OFFICE, true, consumer);
+        channel.basicConsume(QUEUE_AIR_HUMIDITY_LOUNGE, true, consumer);
 
         //Wait indefinitely until notified to exit
         latch.await();
