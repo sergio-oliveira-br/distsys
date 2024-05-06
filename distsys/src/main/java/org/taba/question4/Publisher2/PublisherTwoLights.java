@@ -49,19 +49,25 @@ public class PublisherTwoLights extends Thread
             for (int i = 0; i < 10; i++)
             {
                 //Publishing the Messages (ON/OFF)
-                String msgON = "Lights ON";
-                String msgOFF = "Lights OFF";
+                String msgON = " -> Lights [ON]";
+                String msgOFF = " -> Lights [OFF]";
 
-                channel.basicPublish("", QUEUE_LIGHTS_KITCHEN, null, msgON.getBytes() );
+                //Personalize the msg
+                String myKitchen = QUEUE_LIGHTS_KITCHEN + msgON;
+                String myRoom = QUEUE_LIGHTS_ROOM + msgOFF;
+                String myOffice = QUEUE_LIGHTS_OFFICE + msgOFF;
+                String myLounge = QUEUE_LIGHTS_LOUNGE + msgON;
+
+                channel.basicPublish("", QUEUE_LIGHTS_KITCHEN, null, myKitchen.getBytes());
                 System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_LIGHTS_KITCHEN + "'");
 
-                channel.basicPublish("", QUEUE_LIGHTS_ROOM, null, msgOFF.getBytes() );
+                channel.basicPublish("", QUEUE_LIGHTS_ROOM, null, myRoom.getBytes() );
                 System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_LIGHTS_ROOM + "'");
 
-                channel.basicPublish("", QUEUE_LIGHTS_OFFICE, null, msgOFF.getBytes() );
+                channel.basicPublish("", QUEUE_LIGHTS_OFFICE, null, myOffice.getBytes() );
                 System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_LIGHTS_OFFICE + "'");
 
-                channel.basicPublish("", QUEUE_LIGHTS_LOUNGE, null, msgON.getBytes() );
+                channel.basicPublish("", QUEUE_LIGHTS_LOUNGE, null, myLounge.getBytes() );
                 System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_LIGHTS_LOUNGE + "'");
 
                 Thread.sleep(500); //waiting 1/2 sec
