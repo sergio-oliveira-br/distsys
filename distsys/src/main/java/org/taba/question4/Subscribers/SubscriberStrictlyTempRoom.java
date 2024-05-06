@@ -84,7 +84,7 @@ public class SubscriberStrictlyTempRoom
                 "4.b) Strictly messages related to a Floor/Room/Temperature\n");
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-        
+
         //Create a consumer and bind it to the queue
         Consumer consumer = new DefaultConsumer(channel)
         {

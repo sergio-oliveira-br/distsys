@@ -64,6 +64,11 @@ public class SubscriberRelatedLightWindow
         channel.queueDeclare(QUEUE_WINDOW_OFFICE, false, false, false, null);
         channel.queueDeclare(QUEUE_WINDOW_LOUNGE, false, false, false, null);
 
+        System.out.println("--- \nTABA - Distributed System\nby Sergio Oliveira - x23170981@student.ncirl.ie\n---");
+
+        System.out.println("This Subscriber listens for messages:\n" +
+                "4.d) Any messages that are related to the ALL FLOORS for both light and window\n");
+
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         //Create a consumer and bind it to the queues
