@@ -53,6 +53,11 @@ public class SubscriberAnyRelatedRoom
         channel.queueDeclare(QUEUE_LIGHTS_ROOM, true, false, false, null);
         channel.queueDeclare(QUEUE_WINDOW_ROOM, false, false, false, null);
 
+        System.out.println("--- \nTABA - Distributed System\nby Sergio Oliveira - x23170981@student.ncirl.ie\n---");
+
+        System.out.println("This Subscriber listens for messages:\n" +
+                "4.c) Any messages that are related to Room (including its subtopics)\n");
+
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         //Create a consumer and bind it to the queue
