@@ -14,5 +14,11 @@
  */
 package org.taba.question4.Subscribers;
 
-public class SubscriberAnyRelatedRoom {
+/**
+ * This Subscriber listens for messages:
+ * 4.c) any messages that are related to room (including its subtopics)
+ */
+public class SubscriberAnyRelatedRoom
+{
+
 }
