@@ -78,8 +78,13 @@ public class SubscriberStrictlyTempRoom
         //channel.queueDeclare(QUEUE_AIR_HUMIDITY_OFFICE, false, false, false, null);           //USED TO TEST
         //channel.queueDeclare(QUEUE_AIR_HUMIDITY_LOUNGE, false, false, false, null);           //USED TO TEST
 
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        System.out.println("--- \nTABA - Distributed System\nby Sergio Oliveira - x23170981@student.ncirl.ie\n---");
 
+        System.out.println("This Subscriber listens for messages:\n" +
+                "4.b) Strictly messages related to a Floor/Room/Temperature\n");
+
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        
         //Create a consumer and bind it to the queue
         Consumer consumer = new DefaultConsumer(channel)
         {
