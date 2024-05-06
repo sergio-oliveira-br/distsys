@@ -63,10 +63,10 @@ public class PublisherOneHumidity extends Thread
                 double humidityLounge = myRandom.nextDouble(0.5) + 88;
 
                 //Format the temperature with two decimal places
-                String myHumidityKitchen = String.format("%.2fºC", humidityKitchen) + " Kitchen";
-                String myHumidityRoom = String.format("%.2fºC", humidityRoom) + " Room";
-                String myHumidityOffice = String.format("%.2fºC", humidityOffice) + " Office";
-                String myHumidityLounge = String.format("%.2fºC", humidityLounge) + " Lounge";
+                String myHumidityKitchen = String.format("%.2fº", humidityKitchen) + "% (H20) Kitchen";
+                String myHumidityRoom = String.format("%.2f", humidityRoom) + "% (H20) Room";
+                String myHumidityOffice = String.format("%.2f", humidityOffice) + "%  (H20) Office";
+                String myHumidityLounge = String.format("%.2f", humidityLounge) + "% (H20) Lounge";
 
                 channel.basicPublish("", QUEUE_AIR_HUMIDITY_KITCHEN, null, myHumidityKitchen.getBytes());
                 System.out.println(" [x] Publisher One -> Sent '" + QUEUE_AIR_HUMIDITY_KITCHEN + "'");
