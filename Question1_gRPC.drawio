@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-05-06T14:24:11.658Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15" etag="ViduD2VGZo3ebGXft2r7" version="24.3.1" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-06T14:54:07.145Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15" etag="UV53HO0y-oGUpAw3uH0K" version="24.3.1" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="984" dy="747" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="820" dy="623" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -190,8 +190,8 @@
         <mxCell id="EXLOPuvCRtd55Yw0AyR8-35" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;addBook ( ) - Unary RPC&lt;/h1&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="370" y="880" width="390" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="EXLOPuvCRtd55Yw0AyR8-36" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;getBookDetails ( ) - Unary RPC&lt;/h1&gt;&lt;p&gt;Client: Request details for a single book.&lt;/p&gt;&lt;p&gt;Server: Responds with single response&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1070" y="830" width="390" height="120" as="geometry" />
+        <mxCell id="EXLOPuvCRtd55Yw0AyR8-36" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;getBookDetails ( ) - Unary RPC&lt;/h1&gt;&lt;p style=&quot;font-size: 15px;&quot;&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Description:&amp;nbsp;&lt;/font&gt;The client requests the details of a specific book by sending a request to the server.&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;font-size: 15px;&quot;&gt;The server processes the request and responds with a single response&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="1080" y="800" width="390" height="180" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
