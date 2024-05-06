@@ -53,16 +53,16 @@ public class PublisherTwoLights extends Thread
                 String msgOFF = "Lights OFF";
 
                 channel.basicPublish("", QUEUE_LIGHTS_KITCHEN, null, msgON.getBytes() );
-                System.out.println(" [x] Publisher Two -> Sent '" + "'");
+                System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_LIGHTS_KITCHEN + "'");
 
                 channel.basicPublish("", QUEUE_LIGHTS_ROOM, null, msgOFF.getBytes() );
-                System.out.println(" [x] Publisher Two -> Sent '" + "'");
+                System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_LIGHTS_ROOM + "'");
 
                 channel.basicPublish("", QUEUE_LIGHTS_OFFICE, null, msgOFF.getBytes() );
-                System.out.println(" [x] Publisher Two -> Sent '" + "'");
+                System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_LIGHTS_OFFICE + "'");
 
                 channel.basicPublish("", QUEUE_LIGHTS_LOUNGE, null, msgON.getBytes() );
-                System.out.println(" [x] Publisher Two -> Sent '" + "'");
+                System.out.println(" [x] Publisher Two -> Sent Lights Status: '" + QUEUE_LIGHTS_LOUNGE + "'");
 
                 Thread.sleep(500); //waiting 1/2 sec
             }
