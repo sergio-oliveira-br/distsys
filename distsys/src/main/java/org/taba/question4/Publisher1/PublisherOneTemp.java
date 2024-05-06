@@ -35,6 +35,7 @@ public class PublisherOneTemp extends Thread
     private static final String QUEUE_AIR_TEMP_KITCHEN = "FirstFloor/Kitchen/Temperature";
     private static final String QUEUE_AIR_TEMP_ROOM = "SecondFloor/Room/Temperature";
     private static final String QUEUE_AIR_TEMP_OFFICE = "SecondFloor/Office/Temperature";
+    private static final String QUEUE_AIR_TEMP_LOUNGE = "FirstFloor/Lounge/Temperature"; // lounge
 
     // create instance of Random class
     static Random myRandom = new Random();
@@ -76,18 +77,22 @@ public class PublisherOneTemp extends Thread
             channel.queueDeclare(QUEUE_AIR_TEMP_KITCHEN, false, false, false, null);
             channel.queueDeclare(QUEUE_AIR_TEMP_ROOM, false, false, false, null);
             channel.queueDeclare(QUEUE_AIR_TEMP_OFFICE, false, false, false, null);
+            channel.queueDeclare(QUEUE_AIR_TEMP_LOUNGE, false, false, false, null);
 
-            // Publish each transaction in the ArrayList to the queue with a delay
+            //Publish every random number multiple times with a delay.
             for (int i = 0; i < 1000; i++)
             {
+                //Generating a random num
                 double tempKitchen = myRandom.nextDouble(0.6) + 19;
                 double tempRoom = myRandom.nextDouble(0.7) + 18;
                 double tempOffice = myRandom.nextDouble(0.8) + 17;
+                double tempLounge = myRandom.nextDouble(0.9) + 18;
 
                 //Format the temperature with two decimal places
                 String myTempKitchen = String.format("%.2fºC", tempKitchen) + " Kitchen";
                 String myTempRoom = String.format("%.2fºC", tempRoom) + " Room";
                 String myTempOffice = String.format("%.2fºC", tempOffice) + " Office";
+                String myTempLounge = String.format("%.2fºC", tempLounge) + " Lounge";
 
                 //Sending...
                 channel.basicPublish("", QUEUE_AIR_TEMP_KITCHEN, null, myTempKitchen.getBytes());
@@ -98,6 +103,9 @@ public class PublisherOneTemp extends Thread
 
                 channel.basicPublish("", QUEUE_AIR_TEMP_OFFICE, null, myTempOffice.getBytes());
                 System.out.println(" [x] -> Sent '" + QUEUE_AIR_TEMP_OFFICE + "'");
+
+                channel.basicPublish("", QUEUE_AIR_TEMP_LOUNGE, null, myTempLounge.getBytes());
+                System.out.println(" [x] -> Sent '" + QUEUE_AIR_TEMP_LOUNGE + "'");
 
                 Thread.sleep(1000); //waiting 1 sec
             }
