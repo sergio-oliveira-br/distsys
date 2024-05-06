@@ -72,7 +72,7 @@ public class PublisherOneTemp extends Thread
          */
 
         try (Connection connection = factory.newConnection();
-             Channel channel = connection.createChannel();)
+             Channel channel = connection.createChannel())
         {
             channel.queueDeclare(QUEUE_AIR_TEMP_KITCHEN, false, false, false, null);
             channel.queueDeclare(QUEUE_AIR_TEMP_ROOM, false, false, false, null);

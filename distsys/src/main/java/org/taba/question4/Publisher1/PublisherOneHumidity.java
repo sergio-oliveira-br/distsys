@@ -11,7 +11,7 @@
  *              ---
  * Question 4:By using the MQTT protocol
  * implement in Java the Publisher - Subscriber
- *
+ *              ---
  * RabbitMQ tutorial:
  *  *  https://www.rabbitmq.com/tutorials/tutorial-one-java
  */
@@ -30,7 +30,11 @@ import java.util.Random;
 public class PublisherOneHumidity extends Thread
 {
     //Set up the class and name the queue
-    private static String AIR_HUMIDITY = "firstFloor/kitchen/humidity";
+    private static final String QUEUE_AIR_HUMIDITY_KITCHEN = "FirstFloor/Kitchen/Humidity";
+    private static final String QUEUE_AIR_HUMIDITY_ROOM = "SecondFloor/Room/Humidity";
+    private static final String QUEUE_AIR_HUMIDITY_OFFICE = "SecondFloor/Office/Humidity";
+    private static final String QUEUE_AIR_HUMIDITY_LOUNGE = "FirstFloor/Lounge/Humidity";
+
 
     // create instance of Random class
     static Random myRandom = new Random();
@@ -41,23 +45,40 @@ public class PublisherOneHumidity extends Thread
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost"); //RabbitMQ server host -> http://localhost:15672/#/
 
-        try (Connection connection1 = factory.newConnection();
-             Channel channel1 = connection1.createChannel();)
+        try (Connection connection = factory.newConnection();
+             Channel channel = connection.createChannel())
         {
-            channel1.queueDeclare(AIR_HUMIDITY, false, false, false, null);
+            channel.queueDeclare(QUEUE_AIR_HUMIDITY_KITCHEN, false, false, false, null);
+            channel.queueDeclare(QUEUE_AIR_HUMIDITY_ROOM, false, false, false, null);
+            channel.queueDeclare(QUEUE_AIR_HUMIDITY_OFFICE, false, false, false, null);
+            channel.queueDeclare(QUEUE_AIR_HUMIDITY_LOUNGE, false, false, false, null);
 
+            //Publish every random number multiple times with a delay.
             for (int i = 0; i < 1000; i++)
             {
-                double humidity = myRandom.nextDouble(0.5) + 83;
+                //Generating a random number
+                double humidityKitchen = myRandom.nextDouble(0.5) + 85;
+                double humidityRoom = myRandom.nextDouble(0.5) + 86;
+                double humidityOffice = myRandom.nextDouble(0.5) + 87;
+                double humidityLounge = myRandom.nextDouble(0.5) + 88;
 
                 //Format the temperature with two decimal places
-                StringBuilder myHumidity = new StringBuilder();
-                myHumidity.append("Humidity: ");
-                myHumidity.append(String.format("%.2f" , humidity));
-                myHumidity.append(" %");
+                String myHumidityKitchen = String.format("%.2fºC", humidityKitchen) + " Kitchen";
+                String myHumidityRoom = String.format("%.2fºC", humidityRoom) + " Room";
+                String myHumidityOffice = String.format("%.2fºC", humidityOffice) + " Office";
+                String myHumidityLounge = String.format("%.2fºC", humidityLounge) + " Lounge";
 
-                channel1.basicPublish("", AIR_HUMIDITY, null, String.valueOf(myHumidity).getBytes());
-                System.out.println(" [x] Humidity -> Sent '" + i + "'");
+                channel.basicPublish("", QUEUE_AIR_HUMIDITY_KITCHEN, null, myHumidityKitchen.getBytes());
+                System.out.println(" [x] Publisher One -> Sent '" + QUEUE_AIR_HUMIDITY_KITCHEN + "'");
+
+                channel.basicPublish("", QUEUE_AIR_HUMIDITY_ROOM, null, myHumidityRoom.getBytes());
+                System.out.println(" [x] Publisher One -> Sent '" + QUEUE_AIR_HUMIDITY_ROOM + "'");
+
+                channel.basicPublish("", QUEUE_AIR_HUMIDITY_OFFICE, null, myHumidityOffice.getBytes());
+                System.out.println(" [x] Publisher One -> Sent '" + QUEUE_AIR_HUMIDITY_OFFICE + "'");
+
+                channel.basicPublish("", QUEUE_AIR_HUMIDITY_LOUNGE, null, myHumidityLounge.getBytes());
+                System.out.println(" [x] Publisher One -> Sent '" + QUEUE_AIR_HUMIDITY_LOUNGE + "'");
 
                 Thread.sleep(1000); //waiting 1 sec
             }
