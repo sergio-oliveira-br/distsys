@@ -25,7 +25,10 @@ import com.rabbitmq.client.ConnectionFactory;
 public class PublisherTwoLights extends Thread
 {
     //Set up the class and name the queue
-    private static String LIGHTS = "floor/light/ID";
+    private static final String QUEUE_LIGHTS_KITCHEN = "1ºFloor/Lights:Kitchen/ID:1122";
+    private static final String QUEUE_LIGHTS_ROOM = "2ºFloor/Light:Room/ID:2254";
+    private static final String QUEUE_LIGHTS_OFFICE = "2ºFloor/Light:Office/ID:2260";
+    private static final String QUEUE_LIGHTS_LOUNGE = "1ºFloor/Light:Lounge/ID:1197";
 
     public void run()
     {
@@ -36,13 +39,29 @@ public class PublisherTwoLights extends Thread
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel();)
         {
-            channel.queueDeclare(LIGHTS, false, false, false, null);
-            String msg = "Lights ON";
+            //Declaring the Queue
+            channel.queueDeclare(QUEUE_LIGHTS_KITCHEN, false, false, false, null);
+            channel.queueDeclare(QUEUE_LIGHTS_ROOM, false, false, false, null);
+            channel.queueDeclare(QUEUE_LIGHTS_OFFICE, false, false, false, null);
+            channel.queueDeclare(QUEUE_LIGHTS_LOUNGE, false, false, false, null);
 
-            channel.basicPublish("", LIGHTS, null, msg.getBytes() );
-            System.out.println(" [x] Lights -> Sent '" + "'");
+            //Publishing the Messages (ON/OFF)
+            String msgON = "Lights ON";
+            String msgOFF = "Lights OFF";
 
-            Thread.sleep(1000); //waiting 1 sec
+            channel.basicPublish("", QUEUE_LIGHTS_KITCHEN, null, msgON.getBytes() );
+            System.out.println(" [x] Publisher Two -> Sent '" + "'");
+
+            channel.basicPublish("", QUEUE_LIGHTS_ROOM, null, msgOFF.getBytes() );
+            System.out.println(" [x] Publisher Two -> Sent '" + "'");
+
+            channel.basicPublish("", QUEUE_LIGHTS_OFFICE, null, msgOFF.getBytes() );
+            System.out.println(" [x] Publisher Two -> Sent '" + "'");
+
+            channel.basicPublish("", QUEUE_LIGHTS_LOUNGE, null, msgON.getBytes() );
+            System.out.println(" [x] Publisher Two -> Sent '" + "'");
+
+            Thread.sleep(500); //waiting 1/2 sec
         }
 
         catch (Exception e)
