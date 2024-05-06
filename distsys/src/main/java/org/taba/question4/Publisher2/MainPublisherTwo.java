@@ -22,8 +22,9 @@ public class MainPublisherTwo
         PublisherTwoLights myPublisherTwoLights = new PublisherTwoLights();
 
         //Window
+        PublisherTwoWindow myPublisherTwoWindow = new PublisherTwoWindow();
 
         myPublisherTwoLights.start();
-
+        myPublisherTwoWindow.start();
     }
 }
