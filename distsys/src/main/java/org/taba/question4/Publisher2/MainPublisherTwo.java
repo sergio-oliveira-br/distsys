@@ -14,5 +14,19 @@
  */
 package org.taba.question4.Publisher2;
 
-public class MainPublisherTwo {
+import org.taba.question4.Publisher1.PublisherOneHumidity;
+import org.taba.question4.Publisher1.PublisherOneTemp;
+
+public class MainPublisherTwo
+{
+    public static void main(String[] args)
+    {
+        //Lights
+        PublisherTwoLights myPublisherTwoLights = new PublisherTwoLights();
+
+        //Window
+
+        myPublisherTwoLights.start();
+
+    }
 }
