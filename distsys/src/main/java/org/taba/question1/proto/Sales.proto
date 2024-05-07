@@ -15,17 +15,16 @@
 
 syntax = "proto3";
 
-//Service definition (Unary RPC)
+//Service definition
 service SalesServices
 {
+  //Unary RPC - The server provides information from a given book
   rpc getBookDetails (BookDetailsRequest) returns (BookDetailsResponse) {}
 }
-message BookDetailsRequest
-{
-  string bookDetails = 1;
-}
-message BookDetailsResponse
-{
-  string bookDetails = 1;
-}
+
+//Client-Side - User request using book ID
+message BookDetailsRequest { int32 bookDetailsID = 1; }
+
+//Server-Side - Server provides a summary of that specific book
+message BookDetailsResponse { string bookDetailsSummary = 1; }
 
