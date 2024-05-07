@@ -18,7 +18,8 @@ syntax = "proto3";
 //Service definition
 service WarehouseServices
 {
-  //Server-Side Stream
+  //Server-Side Stream - The client make one single request, like to list all books
+  //and the server responds by streaming all books available
   rpc listAllBooks (ListAllBooksRequest) returns (stream ListAllBooksResponse){}
 }
 
