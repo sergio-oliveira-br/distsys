@@ -1,0 +1,26 @@
+/*
+ * National College Ireland - NCI
+ * Terminal Based Assignment Assessment - TABA
+ * HD Computer Science - International
+ *              ---
+ *        Distributed System
+ *      Lecturer: Mark Cudden
+ *              ---
+ * Author: Sergio Vinicio da Silva Oliveira
+ * x23170981@student.ncirl.ie
+ *              ---
+ * Question 1: Consider that you are designing a "Product Management"
+ * Include appropriate proto file definitions and sample code in your explanations.
+ */
+
+syntax = "proto3";
+
+//Service definition
+service WarehouseServices
+{
+  //Server-Side Stream
+  rpc listAllBooks (ListAllBooksRequest) returns (stream ListAllBooksResponse){}
+}
+
+message ListAllBooksRequest {string requestListMsg = 1;}
+message ListAllBooksResponse {string bookList = 1;}
