@@ -18,9 +18,16 @@ syntax = "proto3";
 //Service definition
 service MarketingServices
 {
-  //Client-Side Stream 
+  //Client-Side Stream
   rpc addBookImages (stream AddBookImagesRequest) returns (AddBookImagesResponse){}
 
   //Bidirectional Stream
-  rpc insertBulkDiscounts (stream  ) returns (stream ) {}
+  rpc insertBulkDiscounts (stream InsertBulkDiscountsRequest ) returns (stream InsertBulkDiscountsResponse) {}
 }
+
+message AddBookImagesRequest {bytes imgBook = 1;}
+message AddBookImagesResponse {string confirmationImgAdded = 1;}
+
+message InsertBulkDiscountsRequest {int32 insertBulkDiscounts = 1;}
+message InsertBulkDiscountsResponse {string confirmationBulkDiscountsInserted = 1;}
+
