@@ -18,16 +18,19 @@ syntax = "proto3";
 //Service definition
 service MarketingServices
 {
-  //Client-Side Stream
+  //Client-Side Stream - The Client stream many images to the server, related one specific book.
+  //A single commit is sent from the Server to the Client.
   rpc addBookImages (stream AddBookImagesRequest) returns (AddBookImagesResponse){}
 
-  //Bidirectional Stream
+  //Bidirectional Stream - The client streams to inset a % of discount in many group/type books.
+  //The Server responds by streaming each request.
   rpc insertBulkDiscounts (stream InsertBulkDiscountsRequest ) returns (stream InsertBulkDiscountsResponse) {}
 }
-
+//Client-Side Stream - addBookImages()
 message AddBookImagesRequest {bytes imgBook = 1;}
 message AddBookImagesResponse {string confirmationImgAdded = 1;}
 
+//Bidirectional Stream - Method insertBulkDiscounts()
 message InsertBulkDiscountsRequest {int32 insertBulkDiscounts = 1;}
 message InsertBulkDiscountsResponse {string confirmationBulkDiscountsInserted = 1;}
 
